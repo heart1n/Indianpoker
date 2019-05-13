@@ -1,0 +1,7 @@
+name: Indianpoker
+version: @version@
+main: heartin.plugin.indianpoker.GamePlugin
+depend: [Nemo]
+commands:
+  game:
+    usage: /<command> help
