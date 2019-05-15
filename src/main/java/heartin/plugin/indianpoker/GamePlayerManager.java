@@ -13,6 +13,7 @@ public class GamePlayerManager {
     private GameProcess process;
 
      Map<UUID, GamePlayer> playersByUniqueId;
+     public static  Map<GamePlayer, Integer> ordinal = new HashMap();
 
     GamePlayerManager(GameProcess process) {
         this.process = process;
@@ -39,25 +40,22 @@ public class GamePlayerManager {
             throw  new IllegalArgumentException("게임의 필요한 인원이 부족합니다 (최소 2명)");
         }
 
-
         this.playersByUniqueId = playersByUniqueId;
         List<GamePlayer> other = new ArrayList<>(playersByUniqueId.values());
         Collections.shuffle(other);
 
         Random random = new Random();
 
-        int ordinal = 0;
+        int ordinal = 10;
         for (GamePlayer gamePlayer : other)
         {
+            gamePlayer.setOrdinal(random.nextInt(ordinal));
 
+            Player player = gamePlayer.getPlayer();
 
-                gamePlayer.setOrdinal(random.nextInt(ordinal));
-
-            Bukkit.broadcastMessage(gamePlayer.getName() + "의" +  gamePlayer.ordinal() + "숫자");
+            GamePlayerManager.ordinal.put(gamePlayer, gamePlayer.ordinal());
+            GameListener.itemHash.put(player,  Integer.valueOf(0));
         }
-
-
-
         setEntity();
     }
 
@@ -103,6 +101,4 @@ public class GamePlayerManager {
         if (gamePlayer != null)
             gamePlayer.setPlayer(null);
     }
-
-
 }

@@ -40,6 +40,9 @@ public final class GameProcess {
 
         for (GamePlayer gamePlayer : this.getPlayerManager().playersByUniqueId.values()) {
             Packet.ENTITY.destroy(gamePlayer.getStand().getBukkitEntity().getEntityId()).sendAll();
+            GamePlayerManager.ordinal.clear();
+            GameListener.itemHash.clear();
+            GameListener.itemAmount.clear();
         }
     }
 

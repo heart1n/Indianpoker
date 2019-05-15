@@ -39,6 +39,7 @@ public class GamePlayer {
     {
         this.player = player;
     }
+
     public int ordinal()
     {
         return this.ordinal;
